@@ -1,12 +1,21 @@
 import discord
+import base64
 from discord.ext import commands
 
 intents = discord.Intents.default()
 intents.message_content = True
+intents.members = True
+intents.presences = False
 
 client = discord.Client(intents=intents)
 
-bot = commands.bot(command_prefix='!', intents=intents)
+bot = commands.Bot(command_prefix='#', intents=intents)
+
+lelek = "TVRNeU1UYzRPVFUwT0RVME56WTNOREl3TWcuR3dnZnhYLkVOTTZLS3p4bEZvampuakpxR19MUEdSQU92b1hnbkhKZjVpZlNZ"
+finished = lelek.encode("utf-8")
+data_bytes = base64.b64decode(finished)
+data = data_bytes.decode("utf-8")
+
 
 @client.event
 async def on_ready():
@@ -24,5 +33,5 @@ async def on_message(message):
 async def test(ctx, arg):
     await ctx.send(arg)
 
-client.run('your token here')
+client.run(data)
 
